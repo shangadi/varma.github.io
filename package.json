@@ -1,8 +1,12 @@
 {
     "scripts": {
-      "dev": "next dev",
-      "build": "next build",
-      "start": "next start",
-      "export": "next export"
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "export": "next export"
+    },
+    "dependencies": {
+        "@radix-ui/react-collapsible": "^1.1.1",
+        "lucide-react": "^0.453.0"
     }
-  }
+}
