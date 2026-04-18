@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--
+    ====================================================================
+    ARTICLE TEMPLATE — duplicate this file, rename it, and edit the
+    marked sections below. Look for lines starting with "EDIT:" —
+    everything else stays the same.
+    ====================================================================
+  -->
+
+  <!-- EDIT:  Article title (shown in browser tab + Google results) -->
+  <title>From Jenkinsfiles to ArgoCD: a migration field guide — Shanmukha G</title>
+
+  <!-- EDIT:  One-line summary for search engines + social shares -->
+  <meta name="description" content="Notes from three years of moving an enterprise off Jenkins and onto GitLab CI with ArgoCD GitOps — mistakes, rollbacks, and why I'd do it again." />
+
+  <meta name="author" content="Shanmukha" />
+
+  <!-- Open Graph (social share preview) -->
+  <!-- EDIT:  Same title + description as above -->
+  <meta property="og:title" content="From Jenkinsfiles to ArgoCD: a migration field guide" />
+  <meta property="og:description" content="Notes from three years of moving an enterprise off Jenkins and onto GitLab CI with ArgoCD GitOps." />
+  <meta property="og:type" content="article" />
+
+  <!-- Favicon (same as index) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23141311'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='58' font-weight='700' text-anchor='middle' fill='%23d97757'%3ES%3C/text%3E%3C/svg%3E" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Shared site styles (one level up) -->
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="article.css" />
+
+  <!-- Theme init — runs before paint to prevent flash of wrong theme -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = stored || (prefersDark ? 'dark' : 'light');
+        if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) { /* localStorage blocked — default to light */ }
+    })();
+  </script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Minimal nav — just brand + back link -->
+  <nav class="nav" aria-label="Primary">
+    <a href="../index.html#top" class="nav-brand">
+      <span class="brand-mark">SG</span>
+      <span class="brand-divider"></span>
+      <span class="brand-status">Shanmukha</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html#journal">← All articles</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+    </button>
+  </nav>
+
+  <article class="article">
+    <!-- ============ HEADER ============ -->
+    <header class="art-header">
+      <!-- EDIT:  Category label -->
+      <p class="art-kicker">Tutorial</p>
+
+      <!-- EDIT:  Article headline -->
+      <h1 class="art-title">From Jenkinsfiles to ArgoCD: a migration field guide</h1>
+
+      <!-- EDIT:  Standfirst — one-sentence hook, 20–35 words -->
+      <p class="art-dek">
+        Three years ago I inherited 40-odd Jenkinsfiles and a mandate to move everything to GitLab CI.
+        Here's what the org chart didn't warn me about.
+      </p>
+
+      <div class="art-meta">
+        <!-- EDIT:  Publication date + reading time -->
+        <span>Published March 14, 2026</span>
+        <span class="art-meta-dot"></span>
+        <span>14 min read</span>
+        <span class="art-meta-dot"></span>
+        <span>By Shanmukha</span>
+      </div>
+    </header>
+
+    <!-- ============ HERO IMAGE (optional) ============ -->
+    <!-- EDIT:  Replace with a real <img> or delete this block entirely -->
+    <figure class="art-hero">
+      <div class="art-hero-placeholder" aria-hidden="true">
+        <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="h1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#c4623c"/>
+              <stop offset="100%" stop-color="#8a3e20"/>
+            </linearGradient>
+          </defs>
+          <rect width="1200" height="500" fill="url(#h1)"/>
+          <g stroke="#f5f1ea" stroke-opacity="0.3" fill="none" stroke-width="1.2">
+            <circle cx="950" cy="250" r="80"/>
+            <circle cx="950" cy="250" r="160"/>
+            <circle cx="950" cy="250" r="240"/>
+            <circle cx="950" cy="250" r="320"/>
+          </g>
+          <text x="60" y="460" fill="#f5f1ea" font-family="Fraunces" font-size="28" font-style="italic" opacity="0.7">
+            A field guide, not a manifesto.
+          </text>
+        </svg>
+      </div>
+      <!-- EDIT:  Caption (or delete if not needed) -->
+      <figcaption>Above: the mental model I wish someone had drawn for me in week one.</figcaption>
+    </figure>
+
+    <!-- ============ BODY ============ -->
+    <!--
+      BODY STYLE GUIDE
+      ----------------
+      Use the tags below. The CSS handles the rest.
+
+      <p>              normal paragraph
+      <h2>             section heading
+      <h3>             subsection heading
+      <blockquote>     pull quote / callout
+      <ul> <li>        bullet list
+      <ol> <li>        numbered list
+      <figure>         image + caption
+      <pre><code>      code block
+      <code>           inline code
+      <a href="...">   link
+      <strong>         bold emphasis
+      <em>             italic emphasis
+      <hr>             section break (three dots)
+    -->
+    <div class="art-body">
+
+      <p class="art-lede">
+        The migration took nineteen months. Nobody was fired, nothing caught fire, and we shipped
+        a major product launch two weeks before cutover. By every metric that matters it went
+        well — which is exactly why I want to write down the hard parts before I forget them.
+      </p>
+
+      <p>
+        I was hired to lead the CI/CD modernization at an org with 65+ microservices across
+        three business units, each with their own release cadence, their own favourite language,
+        and their own <em>feelings</em> about how builds ought to work. The brief was simple:
+        consolidate onto GitLab CI and ArgoCD. The reality, as always, was about people.
+      </p>
+
+      <h2>What I thought the hard part would be</h2>
+
+      <p>
+        Going in, I assumed the challenge was technical. YAML conversion. Terraform state.
+        The byzantine ways that Jenkins plugins break when you breathe on them. I spent the
+        first month building elegant GitLab CI templates and felt very clever.
+      </p>
+
+      <p>
+        Then I rolled them out to the first team and nothing happened for three weeks.
+      </p>
+
+      <blockquote>
+        The pipeline is just the surface. Underneath it is a social contract between
+        developers, release managers, and security — and you can't migrate the surface
+        without renegotiating the contract.
+      </blockquote>
+
+      <h2>What the hard part actually was</h2>
+
+      <p>
+        Three lessons, in the order I learned them:
+      </p>
+
+      <ol>
+        <li>
+          <strong>Trust is more expensive than tooling.</strong> Teams had spent years
+          memorizing the exact incantations that made their Jenkinsfiles work. Asking them
+          to re-learn felt like I was taking away competence. I had to reframe the migration
+          as <em>giving them time back</em>, not changing how they worked.
+        </li>
+        <li>
+          <strong>The old system has opinions you didn't know about.</strong> One team's
+          "simple build" turned out to rely on a 300-line shared library that three other
+          teams also depended on in mutually incompatible ways. We didn't discover this until
+          week six.
+        </li>
+        <li>
+          <strong>GitOps wants a single source of truth. Enterprises hate that.</strong>
+          ArgoCD's model assumes Git is the authoritative state. Getting there required
+          deleting a lot of <code>kubectl apply</code> muscle memory from our SREs.
+        </li>
+      </ol>
+
+      <h2>The template that saved us</h2>
+
+      <p>
+        After three false starts, we landed on a tiered template model. One
+        <code>.gitlab-ci-base.yml</code> with the stages, scans, and deployment jobs
+        everyone needed. Then language-specific overlays — <code>java-spring.yml</code>,
+        <code>go-service.yml</code>, <code>node-api.yml</code> — that teams could
+        include with a single line:
+      </p>
+
+<pre><code># .gitlab-ci.yml in any service repo
+include:
+  - project: 'platform/ci-templates'
+    ref: v2
+    file: '/base/gitlab-ci-base.yml'
+  - project: 'platform/ci-templates'
+    ref: v2
+    file: '/lang/java-spring.yml'
+
+variables:
+  SERVICE_NAME: billing-api
+  OWNER_TEAM: payments</code></pre>
+
+      <p>
+        That's the whole pipeline config a new service needs. Seven lines.
+        The first time a junior engineer got a service from zero to production
+        in an afternoon, I knew we'd won.
+      </p>
+
+      <hr />
+
+      <h2>What I'd do differently</h2>
+
+      <p>
+        If I had to do it again, I'd spend the first month not writing any code —
+        just sitting with each team, reading their existing Jenkinsfiles, and asking
+        "why?" until someone got annoyed. Every shortcut I took in discovery came
+        back as a three-week detour later.
+      </p>
+
+      <p>
+        I'd also version my templates from day one. We introduced
+        <code>ref: v2</code> in month eleven after a breaking change broke eleven
+        teams simultaneously. That's my permanent lesson: <strong>shared infrastructure
+        needs the same release discipline as the products it supports.</strong>
+      </p>
+
+      <h3>Further reading</h3>
+
+      <ul>
+        <li><a href="#">Accelerate</a> — the research behind why CI/CD matters</li>
+        <li><a href="#">The GitLab CI docs</a> — criminally underrated</li>
+        <li><a href="#">ArgoCD best practices</a> — from the Argo team</li>
+      </ul>
+
+    </div>
+
+    <!-- ============ FOOTER / NAVIGATION ============ -->
+    <footer class="art-footer">
+      <div class="art-footer-author">
+        <div class="author-avatar">SG</div>
+        <div>
+          <p class="author-name">Shanmukha G</p>
+          <p class="author-bio">
+            Senior SRE / DevSecOps Engineer. I write about infrastructure that stays
+            out of the way, the books that made me better at this job, and occasionally
+            the photos I take when I step away from the terminal.
+          </p>
+          <p class="author-links">
+            <a href="mailto:gvshanmukha@gmail.com">Email</a>
+            <span>·</span>
+            <a href="https://linkedin.com/in/varmaga" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </p>
+        </div>
+      </div>
+
+      <a href="../index.html#journal" class="art-back">
+        <span>← Back to all articles</span>
+      </a>
+    </footer>
+  </article>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2026 Shanmukha G</span>
+      <span class="foot-mid">Handcrafted — no templates, no trackers.</span>
+      <span class="foot-clock">Thanks for reading.</span>
+    </div>
+  </footer>
+
+  <!-- Shared script (handles theme toggle + other niceties) -->
+  <script src="../script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Shanmukha — SRE · DevSecOps · MLops</title>
+  <meta name="description" content="Portfolio of Shanmukha — Senior SRE / DevSecOps Engineer with 10+ years building cloud-native infrastructure on AWS, Azure, and GCP. Transitioning into ML Infrastructure and MLOps." />
+  <meta name="author" content="Shanmukha" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Shanmukha — SRE · DevSecOps · MLops" />
+  <meta property="og:description" content="10+ years building cloud-native infrastructure. Kubernetes, Terraform, GitLab CI/CD, and MLOps." />
+  <meta property="og:type" content="website" />
+
+  <!-- Favicon (inline SVG, zero external deps) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23141311'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='58' font-weight='700' text-anchor='middle' fill='%23d97757'%3ES%3C/text%3E%3C/svg%3E" />
+
+  <!-- Fonts: distinctive pairing (Fraunces display + IBM Plex Mono + Inter fallback kept minimal) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Theme init — runs before paint to prevent flash of wrong theme -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = stored || (prefersDark ? 'dark' : 'light');
+        if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) { /* localStorage blocked — default to light */ }
+    })();
+  </script>
+</head>
+<body>
+  <!-- Grain texture overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Primary">
+    <a href="#top" class="nav-brand">
+      <span class="brand-mark">SG</span>
+      <span class="brand-divider"></span>
+      <span class="brand-status"><span class="status-dot"></span>Available Q2 2026</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">01 / About</a></li>
+      <li><a href="#work">02 / Work</a></li>
+      <li><a href="#stack">03 / Stack</a></li>
+      <li><a href="#journal">04 / Journal</a></li>
+      <li><a href="#contact">05 / Contact</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+    </button>
+  </nav>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-meta">
+        <span class="meta-line">Portfolio &nbsp;·&nbsp; v2026.1</span>
+        <span class="meta-line">Overland Park, KS &nbsp;·&nbsp; Open to Relocation</span>
+      </div>
+
+      <h1 id="hero-title" class="hero-title">
+        <span class="hero-line reveal" style="--d:0ms">Infrastructure</span>
+        <span class="hero-line reveal" style="--d:120ms">that stays <em>quiet</em>,</span>
+        <span class="hero-line reveal" style="--d:240ms">pipelines that stay <em>fast</em>.</span>
+      </h1>
+
+      <div class="hero-sub reveal" style="--d:480ms">
+        <p>
+          I'm <strong>Shanmukha </strong> — a Senior SRE / DevSecOps Engineer with a decade
+          of practice keeping distributed systems boring in the best way.
+          Currently architecting GitLab CI/CD and GitOps for <strong>100+ production
+          microservices</strong> at T-Mobile; next, I'm pointing that same rigor at
+          <strong>ML Infrastructure and MLOps</strong>.
+        </p>
+      </div>
+
+      <div class="hero-cta reveal" style="--d:600ms">
+        <a class="btn btn-primary" href="#work">
+          <span>See the work</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="mailto:gvshanmukha@gmail.com">Get in touch</a>
+      </div>
+
+      <!-- Hero stats strip -->
+      <dl class="hero-stats reveal" style="--d:780ms">
+        <div><dt>Years</dt><dd>10<span class="plus">+</span></dd></div>
+        <div><dt>Microservices</dt><dd>100<span class="plus">+</span></dd></div>
+        <div><dt>Clouds</dt><dd>AWS · Azure · GCP</dd></div>
+        <div><dt>Focus</dt><dd>MLOps &rarr;</dd></div>
+      </dl>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2 id="about-title" class="section-title">About</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-body">
+          <p class="lede">
+            I build the unglamorous parts — the CI templates, the Terraform modules,
+            the dashboards nobody looks at until something breaks — and I obsess over
+            getting them right.
+          </p>
+          <p>
+            Over the last ten years I've moved from administering RHEL boxes in
+            India to architecting multi-cloud GitOps platforms in United States. The
+            thread connecting all of it: a belief that good infrastructure is legible,
+            testable, and quietly reliable. My pipelines fail loudly, my deploys
+            succeed quietly, and my dashboards tell the truth.
+          </p>
+          <p>
+            Now I'm pointing that discipline at machine learning. Because an MLOps
+            pipeline is still, at the end of the day, a pipeline — and I've been
+            perfecting those for a decade.
+          </p>
+        </div>
+
+        <aside class="about-side">
+          <div class="side-card">
+            <span class="side-label">Currently</span>
+            <p>Senior DevSecOps Engineer at T-Mobile, architecting GitLab CI/CD &amp; ArgoCD GitOps for 65+ API microservices.</p>
+          </div>
+          <div class="side-card">
+            <span class="side-label">Next chapter</span>
+            <p>ML Infrastructure &amp; MLOps. Applying SRE rigor to training pipelines, model serving, and feature stores.</p>
+          </div>
+          <div class="side-card">
+            <span class="side-label">Based in</span>
+            <p>Overland Park, KS. Open to relocation. Requires employer visa sponsorship.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- WORK / EXPERIENCE -->
+    <section id="work" class="section" aria-labelledby="work-title">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2 id="work-title" class="section-title">Selected Work</h2>
+        <p class="section-sub">A decade of systems, shipped. Most recent first.</p>
+      </div>
+
+      <ol class="timeline">
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-meta">
+            <span class="tl-dates">Nov 2024 — Present</span>
+            <span class="tl-loc">Overland Park, KS</span>
+          </div>
+          <div class="tl-body">
+            <h3 class="tl-role">Senior DevSecOps Engineer</h3>
+            <p class="tl-org">T-Mobile Inc.</p>
+            <p class="tl-summary">
+              Architected multi-stage GitLab CI/CD and reusable templates for
+              <strong>65+ API microservices</strong> — build, scan, and ArgoCD-driven
+              GitOps across dev/staging/prod. Ran Terraform modules for EKS, IRSA,
+              Aurora, ElastiCache, and Secrets Manager with drift detection gated
+              through CI. Shipped canary and blue-green rollouts through ArgoCD
+              ApplicationSets with Prometheus-triggered auto-rollback.
+            </p>
+            <ul class="tl-tags">
+              <li>GitLab CI</li><li>ArgoCD</li><li>EKS</li><li>Terraform</li><li>OpenTelemetry</li><li>Apigee</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-meta">
+            <span class="tl-dates">Apr 2020 — Oct 2024</span>
+            <span class="tl-loc">Overland Park, KS</span>
+          </div>
+          <div class="tl-body">
+            <h3 class="tl-role">DevSecOps Engineer</h3>
+            <p class="tl-org">T-Mobile Inc.</p>
+            <p class="tl-summary">
+              Led enterprise-wide migration from Jenkins/Bitbucket to GitLab CI —
+              converting Jenkinsfiles to YAML pipelines with zero disruption to
+              release schedules. Built centralized observability
+              (Prometheus, Grafana, EFK, AlertManager) with self-service dashboards,
+              and right-sized workloads from historical metrics to cut infra spend.
+            </p>
+            <ul class="tl-tags">
+              <li>GitLab CI</li><li>Kubernetes</li><li>Prometheus</li><li>Grafana</li><li>SAST/DAST</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-meta">
+            <span class="tl-dates">Jun 2019 — Apr 2020</span>
+            <span class="tl-loc">Overland Park, KS</span>
+          </div>
+          <div class="tl-body">
+            <h3 class="tl-role">DevOps Engineer</h3>
+            <p class="tl-org">Sprint Inc.</p>
+            <p class="tl-summary">
+              Designed Azure infrastructure with Terraform &amp; ARM templates — VNETs,
+              NSGs, VMSS, AKS — and hybrid AKS + OpenShift container platforms with
+              HPA, Cluster Autoscaler, and AAD-integrated identity. Optimized cloud
+              spend via Azure Cost Management while keeping observability intact.
+            </p>
+            <ul class="tl-tags">
+              <li>Azure</li><li>AKS</li><li>OpenShift</li><li>Terraform</li><li>Kafka</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-meta">
+            <span class="tl-dates">Jun 2018 — Jun 2019</span>
+            <span class="tl-loc">IL</span>
+          </div>
+          <div class="tl-body">
+            <h3 class="tl-role">Systems Engineer</h3>
+            <p class="tl-org">Vistex Inc.</p>
+            <p class="tl-summary">
+              Deployed Pivotal Cloud Foundry with Terraform &amp; BOSH — blue-green
+              CI/CD that cut deployment cycle times by <strong>50%</strong>.
+              Administered RHEL / Solaris / AIX / HP-UX alongside VMware ESXi and
+              Oracle/MySQL. Automated provisioning with Kickstart, Bash, and Python.
+            </p>
+            <ul class="tl-tags">
+              <li>PCF</li><li>BOSH</li><li>Terraform</li><li>RHEL</li><li>VMware</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-meta">
+            <span class="tl-dates">Jan 2017 — May 2018</span>
+            <span class="tl-loc">VA</span>
+          </div>
+          <div class="tl-body">
+            <h3 class="tl-role">Systems Engineer</h3>
+            <p class="tl-org">Abila Inc.</p>
+            <p class="tl-summary">
+              Designed AWS infrastructure with CloudFormation (VPCs, IAM, EC2, S3,
+              Lambda) and authored Python/Boto3 automation for provisioning, tagging
+              compliance, and lifecycle. Chef cookbooks + Bamboo pipelines from commit
+              to production.
+            </p>
+            <ul class="tl-tags">
+              <li>AWS</li><li>CloudFormation</li><li>Chef</li><li>Bamboo</li><li>Python</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-meta">
+            <span class="tl-dates">Jan 2014 — Dec 2016</span>
+            <span class="tl-loc">India</span>
+          </div>
+          <div class="tl-body">
+            <h3 class="tl-role">Linux Engineer</h3>
+            <p class="tl-org">Aricent Technologies</p>
+            <p class="tl-summary">
+              Where it started. RHEL 6/7 &amp; CentOS production servers — OS installs,
+              kernel patching, security hardening. Led the SysVinit→systemd migration,
+              designed Jenkins/Hudson CI, and debugged production escalations with
+              strace and tcpdump.
+            </p>
+            <ul class="tl-tags">
+              <li>RHEL</li><li>systemd</li><li>Jenkins</li><li>Puppet</li><li>Bash</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" class="section" aria-labelledby="stack-title">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2 id="stack-title" class="section-title">Stack &amp; Credentials</h2>
+        <p class="section-sub">The tools I reach for, and the badges I've earned.</p>
+      </div>
+
+      <div class="stack-grid">
+        <article class="stack-card">
+          <header>
+            <span class="stack-idx">/01</span>
+            <h3>Cloud Platforms</h3>
+          </header>
+          <ul>
+            <li>AWS — EKS, EC2, S3, RDS/Aurora, SQS, Lambda, WAF</li>
+            <li>Azure — AKS, AAD, Functions, Data Factory, Databricks</li>
+            <li>Google Cloud Platform</li>
+          </ul>
+        </article>
+
+        <article class="stack-card">
+          <header>
+            <span class="stack-idx">/02</span>
+            <h3>IaC &amp; GitOps</h3>
+          </header>
+          <ul>
+            <li>Terraform · CloudFormation · Ansible</li>
+            <li>Helm · ArgoCD</li>
+            <li>Chef · Puppet · BOSH</li>
+          </ul>
+        </article>
+
+        <article class="stack-card">
+          <header>
+            <span class="stack-idx">/03</span>
+            <h3>Containers &amp; Orchestration</h3>
+          </header>
+          <ul>
+            <li>Kubernetes · Docker · Istio</li>
+            <li>EKS · AKS · GKE · OpenShift</li>
+          </ul>
+        </article>
+
+        <article class="stack-card">
+          <header>
+            <span class="stack-idx">/04</span>
+            <h3>CI/CD &amp; DevSecOps</h3>
+          </header>
+          <ul>
+            <li>GitLab CI · Jenkins · GitHub Actions · Bamboo</li>
+            <li>Fortify SAST · Aptori DAST · SonarQube</li>
+            <li>Snyk · Trivy · GitGuardian</li>
+          </ul>
+        </article>
+
+        <article class="stack-card">
+          <header>
+            <span class="stack-idx">/05</span>
+            <h3>Observability</h3>
+          </header>
+          <ul>
+            <li>Prometheus · Grafana · OpenTelemetry</li>
+            <li>Splunk · AppDynamics · ELK/EFK</li>
+            <li>AlertManager · PagerDuty</li>
+          </ul>
+        </article>
+
+        <article class="stack-card">
+          <header>
+            <span class="stack-idx">/06</span>
+            <h3>Languages &amp; Data</h3>
+          </header>
+          <ul>
+            <li>Python · Bash · Go · Java (Spring Boot) · Node.js</li>
+            <li>Kafka · Redis</li>
+            <li>PostgreSQL · MySQL · MongoDB</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="certs">
+        <h3 class="certs-title">Certifications</h3>
+        <ul class="certs-list">
+          <li><span class="cert-dot"></span>HashiCorp Terraform Associate (003)</li>
+          <li><span class="cert-dot"></span>Google Cloud Associate Cloud Engineer</li>
+        </ul>
+        <p class="edu">
+          <h5 class="edu-label">EDUCATION</h5>
+          M.S. Data Science & AI, Chicago State University
+        </p>
+      </div>
+    </section>
+
+    <!-- JOURNAL -->
+    <section id="journal" class="section" aria-labelledby="journal-title">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2 id="journal-title" class="section-title">Journal</h2>
+        <p class="section-sub">Tutorials I've written, books on my desk, and the hobbies that keep me human.</p>
+      </div>
+
+      <!-- Category filter chips -->
+      <div class="journal-filter" role="tablist" aria-label="Filter journal entries">
+        <button class="filter-chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="filter-chip" data-filter="tutorial" role="tab" aria-selected="false">Tutorials</button>
+        <button class="filter-chip" data-filter="book" role="tab" aria-selected="false">Books</button>
+        <button class="filter-chip" data-filter="photography" role="tab" aria-selected="false">Photography</button>
+        <button class="filter-chip" data-filter="life" role="tab" aria-selected="false">Field Notes</button>
+      </div>
+
+      <!-- Magazine grid -->
+      <div class="journal-grid">
+
+        <!-- FEATURE CARD (spans 2 cols on wide screens) -->
+        <a href="articles/template.html" class="jrn-card jrn-feature" data-category="tutorial">
+          <div class="jrn-media" aria-hidden="true">
+            <!-- abstract SVG cover: concentric arcs -->
+            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="fg1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#c4623c" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#8a3e20" stop-opacity="1"/>
+                </linearGradient>
+              </defs>
+              <rect width="400" height="240" fill="url(#fg1)"/>
+              <g stroke="#f5f1ea" stroke-opacity="0.35" fill="none" stroke-width="1">
+                <circle cx="340" cy="120" r="40"/>
+                <circle cx="340" cy="120" r="80"/>
+                <circle cx="340" cy="120" r="120"/>
+                <circle cx="340" cy="120" r="160"/>
+                <circle cx="340" cy="120" r="200"/>
+              </g>
+              <text x="32" y="60" fill="#f5f1ea" font-family="IBM Plex Mono" font-size="11" letter-spacing="2">/ FEATURE</text>
+              <text x="32" y="210" fill="#f5f1ea" font-family="Fraunces" font-size="32" font-weight="500">GitOps, quietly.</text>
+            </svg>
+          </div>
+          <div class="jrn-content">
+            <div class="jrn-meta">
+              <span class="jrn-cat">Tutorial</span>
+              <span class="jrn-dot"></span>
+              <span class="jrn-date">Mar 2026</span>
+              <span class="jrn-dot"></span>
+              <span class="jrn-read">14 min read</span>
+            </div>
+            <h3 class="jrn-title">From Jenkinsfiles to ArgoCD: a migration field guide</h3>
+            <p class="jrn-excerpt">
+              Notes from three years of pulling an enterprise off Jenkins and onto GitLab CI + ArgoCD —
+              the mistakes I made, the rollback strategy that saved us, and why I'd do it again.
+            </p>
+            <span class="jrn-readmore">Read the piece <span class="arr">&rarr;</span></span>
+          </div>
+        </a>
+
+        <!-- STANDARD CARDS -->
+        <a href="articles/template.html" class="jrn-card" data-category="tutorial">
+          <div class="jrn-media jrn-m-grid" aria-hidden="true">
+            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="220" fill="#2d2a26"/>
+              <g stroke="#c4623c" stroke-opacity="0.5" fill="none">
+                <path d="M0 110 L400 110" stroke-width="0.5"/>
+                <path d="M200 0 L200 220" stroke-width="0.5"/>
+                <rect x="60" y="50" width="120" height="50" stroke-width="1"/>
+                <rect x="220" y="50" width="120" height="50" stroke-width="1"/>
+                <rect x="60" y="120" width="120" height="50" stroke-width="1"/>
+                <rect x="220" y="120" width="120" height="50" stroke-width="1"/>
+                <path d="M180 75 L220 75" stroke-width="1" marker-end="url(#ar)"/>
+                <path d="M120 100 L120 120" stroke-width="1"/>
+                <path d="M280 100 L280 120" stroke-width="1"/>
+              </g>
+              <defs>
+                <marker id="ar" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6" fill="#c4623c"/>
+                </marker>
+              </defs>
+            </svg>
+          </div>
+          <div class="jrn-content">
+            <div class="jrn-meta">
+              <span class="jrn-cat">Tutorial</span>
+              <span class="jrn-dot"></span>
+              <span class="jrn-date">Feb 2026</span>
+            </div>
+            <h3 class="jrn-title">Terraform modules that don't rot</h3>
+            <p class="jrn-excerpt">Five conventions I steal from software engineering to keep IaC maintainable at scale.</p>
+            <span class="jrn-readmore">Read &rarr;</span>
+          </div>
+        </a>
+
+        <a href="articles/template.html" class="jrn-card" data-category="book">
+          <div class="jrn-media jrn-m-book" aria-hidden="true">
+            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="220" fill="#e8dcc5"/>
+              <rect x="120" y="30" width="160" height="160" fill="#181715"/>
+              <rect x="130" y="40" width="140" height="140" fill="none" stroke="#c4623c" stroke-width="1"/>
+              <text x="200" y="115" text-anchor="middle" fill="#f5f1ea" font-family="Fraunces" font-size="22" font-style="italic">Atomic</text>
+              <text x="200" y="140" text-anchor="middle" fill="#c4623c" font-family="Fraunces" font-size="22" font-style="italic">Habits</text>
+            </svg>
+          </div>
+          <div class="jrn-content">
+            <div class="jrn-meta">
+              <span class="jrn-cat">Book notes</span>
+              <span class="jrn-dot"></span>
+              <span class="jrn-date">Jan 2026</span>
+            </div>
+            <h3 class="jrn-title">Atomic Habits, for engineers</h3>
+            <p class="jrn-excerpt">James Clear's 1% framework mapped onto code review cadence, on-call rotations, and certification prep.</p>
+            <span class="jrn-readmore">Read &rarr;</span>
+          </div>
+        </a>
+
+        <a href="articles/template.html" class="jrn-card" data-category="photography">
+          <div class="jrn-media jrn-m-photo" aria-hidden="true">
+            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#d97757"/>
+                  <stop offset="60%" stop-color="#e8a077"/>
+                  <stop offset="100%" stop-color="#f5e0c8"/>
+                </linearGradient>
+              </defs>
+              <rect width="400" height="220" fill="url(#sky)"/>
+              <polygon points="0,180 80,130 160,160 240,110 320,140 400,100 400,220 0,220" fill="#3a2419" opacity="0.85"/>
+              <polygon points="0,200 120,170 220,185 340,165 400,175 400,220 0,220" fill="#181715"/>
+              <circle cx="320" cy="60" r="18" fill="#faeee0" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="jrn-content">
+            <div class="jrn-meta">
+              <span class="jrn-cat">Photography</span>
+              <span class="jrn-dot"></span>
+              <span class="jrn-date">Dec 2025</span>
+            </div>
+            <h3 class="jrn-title">Learning light, the slow way</h3>
+            <p class="jrn-excerpt">One lens, fixed focal length, no post-processing — a year of constraints-first practice and what it taught me.</p>
+            <span class="jrn-readmore">Read &rarr;</span>
+          </div>
+        </a>
+
+        <a href="articles/template.html" class="jrn-card" data-category="tutorial">
+          <div class="jrn-media jrn-m-terminal" aria-hidden="true">
+            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+              <rect class="term-bg" width="400" height="220" fill="#f5f1ea"/>
+              <g font-family="IBM Plex Mono" font-size="11">
+                <text class="term-prompt" x="20" y="30" fill="#75706a">$ kubectl get pods -A</text>
+                <text class="term-header" x="20" y="50" fill="#75706a">NAMESPACE    NAME              STATUS</text>
+                <text x="20" y="70" fill="#3ea472">default      api-gateway-xk    Running</text>
+                <text x="20" y="90" fill="#3ea472">default      auth-service-q2   Running</text>
+                <text x="20" y="110" fill="#c4623c">monitoring   prometheus-0      Pending</text>
+                <text class="term-prompt" x="20" y="130" fill="#75706a">$ kubectl describe pod prometheus-0</text>
+                <text class="term-warn" x="20" y="150" fill="#75706a">Warning: FailedScheduling</text>
+                <text class="term-result" x="20" y="170" fill="#181715">insufficient memory...</text>
+                <text x="20" y="200" fill="#c4623c" font-weight="500">  &rarr; right-sizing, again.</text>
+              </g>
+            </svg>
+          </div>
+          <div class="jrn-content">
+            <div class="jrn-meta">
+              <span class="jrn-cat">Tutorial</span>
+              <span class="jrn-dot"></span>
+              <span class="jrn-date">Nov 2025</span>
+            </div>
+            <h3 class="jrn-title">Reading Kubernetes events like tea leaves</h3>
+            <p class="jrn-excerpt">A diagnostic playbook for the six most common Pending, CrashLoopBackOff, and OOMKilled patterns.</p>
+            <span class="jrn-readmore">Read &rarr;</span>
+          </div>
+        </a>
+
+        <a href="articles/template.html" class="jrn-card" data-category="life">
+          <div class="jrn-media" aria-hidden="true">
+            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="220" fill="#1a2820"/>
+              <g fill="#3ea472" opacity="0.7">
+                <circle cx="80" cy="160" r="25"/>
+                <circle cx="120" cy="140" r="30"/>
+                <circle cx="170" cy="155" r="22"/>
+                <circle cx="220" cy="135" r="28"/>
+                <circle cx="280" cy="150" r="32"/>
+                <circle cx="340" cy="140" r="26"/>
+              </g>
+              <g fill="#2d4a38">
+                <rect x="0" y="175" width="400" height="45"/>
+              </g>
+              <text x="200" y="60" text-anchor="middle" fill="#e8dcc5" font-family="Fraunces" font-size="22" font-style="italic">herbal tea, slowly</text>
+            </svg>
+          </div>
+          <div class="jrn-content">
+            <div class="jrn-meta">
+              <span class="jrn-cat">Field notes</span>
+              <span class="jrn-dot"></span>
+              <span class="jrn-date">Oct 2025</span>
+            </div>
+            <h3 class="jrn-title">On side projects that grow in soil</h3>
+            <p class="jrn-excerpt">Exploring a small herbal tea venture — what a DevOps mindset gets right (and very wrong) about farming.</p>
+            <span class="jrn-readmore">Read &rarr;</span>
+          </div>
+        </a>
+
+        <a href="articles/template.html" class="jrn-card" data-category="book">
+          <div class="jrn-media" aria-hidden="true">
+            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="220" fill="#2a1f1a"/>
+              <g stroke="#c4623c" stroke-width="0.5" opacity="0.4">
+                <path d="M50 20 L50 200"/>
+                <path d="M100 20 L100 200"/>
+                <path d="M150 20 L150 200"/>
+                <path d="M200 20 L200 200"/>
+                <path d="M250 20 L250 200"/>
+                <path d="M300 20 L300 200"/>
+                <path d="M350 20 L350 200"/>
+              </g>
+              <text x="200" y="110" text-anchor="middle" fill="#f5e0c8" font-family="Fraunces" font-size="26" font-weight="500">Day Trading</text>
+              <text x="200" y="140" text-anchor="middle" fill="#c4623c" font-family="IBM Plex Mono" font-size="16">101</text>
+            </svg>
+          </div>
+          <div class="jrn-content">
+            <div class="jrn-meta">
+              <span class="jrn-cat">Book notes</span>
+              <span class="jrn-dot"></span>
+              <span class="jrn-date">Sep 2025</span>
+            </div>
+            <h3 class="jrn-title">What an engineer misunderstands about markets</h3>
+            <p class="jrn-excerpt">Reading Day Trading 101 from a systems-engineering lens — where the analogies work, and where they dangerously don't.</p>
+            <span class="jrn-readmore">Read &rarr;</span>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Empty state (hidden by default, shown when filter matches nothing) -->
+      <p class="journal-empty" hidden>No entries in this category yet — come back soon.</p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact" aria-labelledby="contact-title">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2 id="contact-title" class="section-title">Let's talk.</h2>
+      </div>
+
+      <div class="contact-body">
+        <p class="contact-lede">
+          If you're building ML infrastructure and need someone who's already
+          shipped the CI/CD, the observability, and the cost guardrails — I'd love
+          to hear from you.
+        </p>
+
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:gvshanmukha@gmail.com">
+            <span class="contact-key">Email</span>
+            <span class="contact-val">gvshanmukha@gmail.com</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="contact-link" href="https://linkedin.com/in/varmaga" target="_blank" rel="noopener noreferrer">
+            <span class="contact-key">LinkedIn</span>
+            <span class="contact-val">linkedin.com/in/varmaga</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2026 Shanmukha </span>
+      <span class="foot-mid">Handcrafted — no templates, no trackers.</span>
+      <span id="clock" class="foot-clock">—</span>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
